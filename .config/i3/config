@@ -1,0 +1,200 @@
+# Recommened location: ~/.config/sway/config
+#
+# Read `man 5 sway` for a complete reference.
+
+# Variables
+
+## Mod key
+### Mod4: Super
+
+
+set $mod Mod4
+
+# Terminal Emulator
+set $term /usr/local/kitty.app/bin/kitty
+
+## Colors
+set $blue #5fafff
+set $gree #87d787
+set $salmon #ffaf87
+set $yellow #ffff87
+set $turquoise #039799
+set $red #ff5f87
+set $pink #ff6c9b
+
+set $dark #252525
+set $light #ffffff
+
+# Application launcher | bemenu
+set $menu bemenu-run \
+--fn "UbuntuMono Nerd Font Mono 14" \
+--prompt "❯" \
+--prefix "➜" \
+--hf "#5fafff" \
+-n \
+--tf "#87d787" \
+--list 3 | xargs i3-msg exec
+
+## --fn     | Specify font: <font> <size>
+## --prefix | Prefix selected item with <prefix>
+## --hf     | Highlighted foreground: <color>
+## -n       | Don't overlap windows
+## --tf     | Title foreground: <color>
+## --list   | List <number> items vertically: 
+
+# Theme | #Border #Background #Text #Indicator #Child Border
+client.focused	$blue	$dark $light $pink $blue
+client.focused_inactive	$dark	$dark $light $salmon $dark
+client.unfocused	$dark	$dark $light $pink $dark
+client.urgent	$red	$yellow $light $red $red
+client.placeholder	$dark	$dark $light $pink $dark
+
+client.background	$dark
+
+# Border
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+
+# Window title
+font pando: monospace
+title_align center
+
+# Execute on startup
+
+## Bluelight Filter | Gammastep
+exec gammastep -l 52:13 -t 4500:4000
+
+### -m | Method of setting the temperature
+### -l | Coordinate
+### -t | Day and night color temperatures in Kelvin
+
+# Output
+
+## Wallpaper
+
+## Idling 
+#exec swayidle -w \
+#timeout 300 'swaymsg "output HDMI-A-1 dpms off"' \
+#resume 'swaymsg "output HDMI-A-1 dpms on"'
+
+# Mouse focusing
+focus_follows_mouse no
+
+# Key bindings
+
+## Start a terminal
+bindsym $mod+Return exec $term
+
+## Kill focused window
+bindsym $mod+q kill
+
+## Start app launcher
+bindsym $mod+d exec $menu
+
+## Manage floating windows
+floating_modifier $mod
+
+### $mod + left mouse button = move floating window
+### $mod + right mouse button = resize focused window
+
+## Reload the configuration file
+bindsym $mod+Shift+c reload
+
+## Exit i3 
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
+
+## Windows
+
+### Move between windows
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym Mod1+Tab focus next
+bindsym Mod1+Shift+Tab focus prev
+
+### Move windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+## Workspace
+
+### Switch between workspaces
+
+bindsym Ctrl+Mod1+Left  workspace prev
+bindsym Ctrl+Mod1+Right workspace next
+
+### Go to workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+
+## Layout management
+
+### Focus split direction
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+### Layout styles 
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+
+# Scratchpad:
+
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+

@@ -1,0 +1,79 @@
+[{
+    "height": 40,
+    "layer": "top",
+    "position": "top",
+    "spacing": 4,
+    "modules-left": ["sway/workspaces", "custom/cmus"],
+    "sway/workspaces": {
+	    "disable-scroll": true,
+	    "persistent_workspaces": {
+		    "1": [],
+		    "2": [],
+		    "3": [],
+		    "4": [],
+	    }
+    },
+
+    "custom/cmus": {
+	    "interval": 1,
+	    "exec": "PLAYING=$(cmus-remote -C status | grep file | sed -r 's\/(.*[\\\/])\/\/g' | sed 's\/\\..*\/\/g') && if [ ${#PLAYING} -lt 50 ]; then printf \"$PLAYING\"; else printf \"$PLAYING\" | awk '{ print substr($0, 0, 50) }' | cat | tr '\\n' ' ' | sed 's\/\\s*$\/\/' && printf \"...\" ; fi",
+	    "exec-if": "pgrep cmus",
+	    "on-click": "cmus-remote -u",
+	    "escape": true,
+	    "format": "♫ {}",
+    },
+
+    "modules-center": ["clock"],
+    "clock": {
+    	    "timezone": "Europe/Berlin",
+	    "locale": "en_US.UTF-8",
+	    "interval": 1,
+	    "format": "{:|%m|%d|0%u| |<span color=\"#5fafff\">%I</span>|<span color=\"#87d787\">%M</span>|<span color=\"#ff5f87\">%S</span>|}",
+	    "tooltip-format": "<span size=\"12.5pt\">{:<span underline=\"double\" color=\"#5fafff\">%Y</span> <span underline=\"double\" color=\"#87d787\">%b.</span> <span underline=\"double\" color=\"#ff5f87\">%A</span>}\n<span underline_color=\"#ff5f87\">{calendar}</span></span>",
+    },
+
+    "modules-right": ["sway/mode", "pulseaudio", "cpu", "memory", "idle_inhibitor"],
+    "sway/mode": {
+	    "format": "<span underline=\"double\" underline_color=\"#5fafff\">R</span>"
+    },
+    "pulseaudio": {
+	    "format": "{volume}% {icon} | {format_source}",
+	    "format-bluetooth": "{volume}% {icon} | {format_source}",
+	    "format-muted": "0% ‭ﱝ | {format_source}",
+
+	    "format-icons": {
+		    "headset": "",
+		    "default": [" ", " "],
+	    },
+
+	    "format-source": "{volume}%  ",
+	    "format-source-muted": "0%  ",
+
+	    "on-click-right": "pavucontrol"
+    },
+    "cpu": {
+	    "format": "| CPU: {usage}%",
+    },
+    "memory": {
+	    "format": " | MEM: {}%"
+    },
+    "idle_inhibitor": {
+	    "format": " | {icon} ",
+	    "format-icons": {
+		    "activated": " ",
+		    "deactivated": " ",
+	    },
+    },
+},
+{
+    "height": 30,
+    "name": "bottom",
+    "layer": "bottom",
+    "position": "bottom",
+    "modules-center": ["sway/window"],
+    "sway/window": {
+	"tooltip": false,
+        "format": "<span text_transform=\"uppercase\">{}</span>",
+    },
+}]
+

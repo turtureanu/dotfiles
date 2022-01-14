@@ -1,0 +1,107 @@
+/* Color variables... the GTK way */
+@define-color blue #5fafff;
+@define-color green #87d787;
+@define-color salmon #ffaf87;
+@define-color yellow #ffff87;
+@define-color turquoise #039799;
+@define-color red #ff5f87 ;
+@define-color pink #ff6c9b;
+
+@define-color dark #252525;
+@define-color gray #bcbcbc;
+@define-color white #ffffff;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "UbuntuMono Nerd Font";
+  font-weight: 600;
+  font-size: 1rem;
+  min-height: 0;
+}
+
+window#waybar {
+  color: @white;
+  background: @dark;
+}
+
+tooltip {
+  border: 0.125rem dashed @white;
+  border-radius: 0.5em;
+  background-color: RGBA(45, 45, 45, 0.875);
+  text-decoration-color: @red;
+  text-decoration: underline;
+}
+
+tooltip label {
+  color: @white;
+  font-size: 1rem;
+  padding: 0;
+}
+
+#workspaces button {
+  color: @white;
+  padding: 0 0.5em;
+  border-top: transparent solid 0.2rem;
+  box-shadow: none;
+}
+
+#workspaces button:hover {
+  background: initial;
+  transition-duration: 250ms;
+  border-top-color: @white;
+  text-shadow: unset;
+}
+
+#workspaces button.persistent {
+  color: @gray;
+  border-top: transparent solid 0.2rem;
+}
+
+#workspaces button.focused {
+  color: @blue;
+  border-top-color: @blue;
+  box-shadow: none;
+
+}
+
+@keyframes urgent {
+  0% {
+    color: @red;
+    border-color: @pink;
+  }
+
+  50% {
+    color: @white;
+    border-color: @white;
+  }
+
+  100% {
+    color: @red;
+    border-color: @red;
+  }
+}
+
+#workspaces button.urgent {
+  animation: urgent 750ms ease-in-out infinite;
+}
+
+#mode, #clock {
+  font-family: "UbuntuMono Nerd Font Mono";
+  font-weight: 700;
+  padding: 0 0.675em;
+}
+
+#clock {
+  font-size: 1.125rem;
+  background-position: center;
+}
+
+#mode {
+  color: @blue;
+}
+
+#window {
+  color: @white;
+  font-size: 1.125rem;
+}
