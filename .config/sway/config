@@ -35,6 +35,12 @@ set $menu bemenu-run \
 --prefix "➜" \
 --hf "$blue" \
 -n \
+--nb "$dark" \
+--fb "$dark" \
+--hb "$dark" \
+--sb "$dark" \
+--scb "$dark" \
+--tb "$dark" \
 --tf "$green" \
 --list 3 | xargs swaymsg exec
 
@@ -80,15 +86,15 @@ exec /usr/bin/pipewire & /usr/bin/pipewire-pulse & /usr/bin/pipewire-media-sessi
 # Output
 
 ## Wallpaper
-output * bg /usr/share/backgrounds/artix_logo.png fill
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1366x768.png fill
 
 ## Laptop Backlight
-output eDP-1 disable
+#output eDP-1 disable
 
 ## Idling 
 exec swayidle -w \
-timeout 300 'swaymsg "output HDMI-A-1 dpms off"' \
+timeout 300 'swaymsg "output eDP-1 dpms off"' \
 resume 'swaymsg "output HDMI-A-1 dpms on"'
 
 # Mouse focusing
@@ -113,7 +119,11 @@ input * {
 } 
 
 
-## Audio manipulation
+## Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+
+## Audio
 
 ### Volume
 
@@ -164,8 +174,8 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-bindsym Alt+Tab focus next
-bindsym Alt+Shift+Tab focus prev
+bindsym Alt+Right focus next
+bindsym Alt+Left focus prev
 
 ### Move windows
 bindsym $mod+Shift+Left move left

@@ -3,7 +3,7 @@
     "layer": "top",
     "position": "top",
     "spacing": 4,
-    "modules-left": ["sway/workspaces", "custom/cmus"],
+    "modules-left": ["sway/workspaces", "sway/language", "idle_inhibitor", "custom/weather" , "custom/cmus"],
     "sway/workspaces": {
 	    "disable-scroll": true,
 	    "persistent_workspaces": {
@@ -13,7 +13,21 @@
 		    "4": [],
 	    }
     },
-
+    "sway/language": {
+	    "format": " | <span text-transform=\"uppercase\">{}</span> | ",
+    },
+    "idle_inhibitor": {
+	    "format": " | {icon} ",
+	    "format-icons": {
+		    "activated": "  |",
+		    "deactivated": "  |",
+	    },
+    },
+    "custom/weather": {
+        "format": "| {} |",
+	"exec": "curl 'https://wttr.in/?format=1'",
+        "interval": 900,
+    },
     "custom/cmus": {
 	    "interval": 1,
 	    "exec": "PLAYING=$(cmus-remote -C status | grep file | sed -r 's\/(.*[\\\/])\/\/g' | sed 's\/\\..*\/\/g') && if [ ${#PLAYING} -lt 50 ]; then printf \"$PLAYING\"; else printf \"$PLAYING\" | awk '{ print substr($0, 0, 50) }' | cat | tr '\\n' ' ' | sed 's\/\\s*$\/\/' && printf \"...\" ; fi",
@@ -23,7 +37,7 @@
 	    "format": "♫ {}",
     },
 
-    "modules-center": ["clock"],
+    "modules-center": ["sway/mode", "clock", "sway/mode"],
     "clock": {
     	    "timezone": "Europe/Berlin",
 	    "locale": "en_US.UTF-8",
@@ -32,37 +46,42 @@
 	    "tooltip-format": "<span size=\"12.5pt\">{:<span underline=\"double\" color=\"#5fafff\">%Y</span> <span underline=\"double\" color=\"#87d787\">%b.</span> <span underline=\"double\" color=\"#ff5f87\">%A</span>}\n<span underline_color=\"#ff5f87\">{calendar}</span></span>",
     },
 
-    "modules-right": ["sway/mode", "pulseaudio", "cpu", "memory", "idle_inhibitor"],
     "sway/mode": {
-	    "format": "<span underline=\"double\" underline_color=\"#5fafff\">R</span>"
+        "format": "",
+        "max-length": 0,
+    },
+ 
+    "modules-right": ["custom/scratchpad_indicator", "pulseaudio", "cpu", "memory", "temperature"],
+    "custom/scratchpad_indicator": {
+       "interval": 3,
+       "exec": "swaymsg -t get_tree | jq 'recurse(.nodes[]) | first(select(.name==\"__i3_scratch\")) | .floating_nodes | length | select(. >= 1)'",
+       "format": "{} ",
+       "on-click": "swaymsg 'scratchpad show'",
+       "on-click-right": "swaymsg 'move scratchpad'"
     },
     "pulseaudio": {
-	    "format": "{volume}% {icon} | {format_source}",
-	    "format-bluetooth": "{volume}% {icon} | {format_source}",
-	    "format-muted": "0% ‭ﱝ | {format_source}",
+	    "format": "| {volume}% {icon} | {format_source}",
+	    "format-bluetooth": "| {volume}% {icon} | {format_source}",
+	    "format-muted": "| 0% ‭ﱝ | {format_source}",
 
 	    "format-icons": {
 		    "headset": "",
 		    "default": [" ", " "],
 	    },
 
-	    "format-source": "{volume}%  ",
-	    "format-source-muted": "0%  ",
+	    "format-source": "{volume}%  | ",
+	    "format-source-muted": "0%  | ",
 
 	    "on-click-right": "pavucontrol"
     },
     "cpu": {
-	    "format": "| CPU: {usage}%",
+	    "format": " | CPU: {usage}%",
     },
     "memory": {
 	    "format": " | MEM: {}%"
     },
-    "idle_inhibitor": {
-	    "format": " | {icon} ",
-	    "format-icons": {
-		    "activated": " ",
-		    "deactivated": " ",
-	    },
+    "temperature": {
+    	    "format": " | TMP: {temperatureC}°C | "
     },
 },
 {

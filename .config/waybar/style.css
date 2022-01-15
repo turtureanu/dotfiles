@@ -78,7 +78,7 @@ tooltip label {
 
   100% {
     color: @red;
-    border-color: @red;
+    border-color: @pink;
   }
 }
 
@@ -86,22 +86,25 @@ tooltip label {
   animation: urgent 750ms ease-in-out infinite;
 }
 
-#mode, #clock {
-  font-family: "UbuntuMono Nerd Font Mono";
-  font-weight: 700;
+#clock {  font-weight: 700;
   padding: 0 0.675em;
 }
 
 #clock {
-  font-size: 1.125rem;
-  background-position: center;
+  font-size: 1.25rem;
 }
 
 #mode {
-  color: @blue;
+  color: @pink;
+  padding: 0 0.5em;
 }
 
 #window {
   color: @white;
+  font-size: 1.125rem;
+}
+
+#custom-weather {
+  font-weight: 900;
   font-size: 1.125rem;
 }
