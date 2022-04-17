@@ -43,10 +43,6 @@
 
   // Extensions
   "code-runner.runInTerminal": true,
-  //  -> clangd
-  "clangd.path": "/home/vex/.config/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/11.0.0/clangd_11.0.0/bin/clangd",
-  //  -> Neovim
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
 
   // Web Extensions
   //  -> Live Server
@@ -58,105 +54,41 @@
   "dartsass.outputFormat": "cssonly",
   "dartsass.sassBinPath": "/usr/bin/sass",
   "dartsass.targetDirectory": "css",
-  // Cspell global dictionary
-  "cSpell.userWords": [
-    "Afick",
-    "Bleachbit",
-    "Bubblewrap",
-    "Covid",
-    "EPUB",
-    "Flexbox",
-    "Heatsink",
-    "LUKS",
-    "Lynis",
-    "Neovim",
-    "Pacman",
-    "Sandboxing",
-    "Twofish",
-    "UEFI",
-    "ZORK",
-    "arnos",
-    "btns",
-    "chkrootkit",
-    "clamav",
-    "cryptsetup",
-    "customizability",
-    "darkshadow",
-    "dlight",
-    "ftxt",
-    "gtkmm",
-    "inhearitance",
-    "mirrorlist",
-    "mkinitcpio",
-    "otxt",
-    "rebootpower",
-    "rkhunter",
-    "stylesheet",
-    "sysrq",
-    "unlicense",
-    "usbguard",
-    "wincraft"
-  ],
-  // SVG Previewer
+ // SVG Previewer
   "svg.preview.mode": "svg",
   // Git
   "git.enableSmartCommit": true,
   "git.autofetch": true,
-  // "[cpp]": {
-  //   "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-  // },
   "prettier.htmlWhitespaceSensitivity": "ignore",
   "prettier.trailingComma": "all",
   "sass.format.deleteWhitespace": false,
   "files.trimTrailingWhitespace": true,
-  "cSpell.enableFiletypes": ["haml", "todo"],
   "livePugCompiler.savePath": "/",
-
-  // Todo+
-  "todo.file.name": "z.todo", // Todo file name. Other supported names are: `*.todo`, `*.todos`, `*.task`, `*.tasks`, `*.taskpaper` and `todolist.txt`
-  "todo.file.include": ["*TODO*"], // Globs to use for including files
-  "todo.file.defaultContent": "\n", // New todo files default content
-  "todo.file.view.expanded": true, // Start the tree in an expanded state
-  "todo.indentation": "  ", // String used for indentation
-  "todo.symbols.box": "[ ]", // Box symbol
-  "todo.symbols.done": "[x]", // Done symbol
-  "todo.symbols.cancelled": "[-]", // Cancelled symbol
-  "todo.colors.done": "#00B25B", // Done todo color
-  "todo.colors.cancelled": "#D0263D", // Cancelled todo color
-  "todo.colors.code": "#FFBA4B", // Code color
-  "todo.colors.comment": "#7AABAF", // Comment color
-  "todo.colors.projectStatistics": "#4694a3", // Project statistics color
-  "todo.colors.tag": "#FFC781", // Tag color
-  "todo.colors.types": { "TODO": "#6D6EFF", "FIXME": "#EE5d00" }, // Object mapping todo types to their color
-  "todo.timer.statusbar.color": "#FFC781",
-  "todo.archive.project.enabled": true, // Enable the @project tag
-  "todo.archive.project.separator": ".", // String used for joining multiple projects
-  "todo.archive.sortByDate": false, // Sort lines by finished date
-  "todo.formatting.enabled": true, // Enable markdown-like formatting
-  "todo.timekeeping.created.enabled": false, // Enable the @created tag
-  "todo.timekeeping.created.format": "MM-DD HH:mm", // Format used for displaying time inside @created
-  "todo.timekeeping.started.time": false, // Insert the time inside the @started tag
-  "todo.timekeeping.started.format": "|HH:mm:ss|", // Format used for displaying time inside @started
-  "todo.timekeeping.finished.enabled": false, // Enable the @done/cancelled tag. It's always enabled if you explicitly start a todo or if you use only 1 symbol
-  "todo.timekeeping.finished.time": false, // Insert the time inside the @done/cancelled tag
-  "todo.timekeeping.finished.format": "|DD|MM| |HH|mm|",
-  "python.showStartPage": false,
   "workbench.colorTheme": "Default Dark+",
   "window.menuBarVisibility": "toggle",
   "terminal.integrated.fontSize": 16,
-  "dartsass.autoPrefixBrowsersList": [
-    "> 1%",
-    "last 10 versions"
-  ],
+  "dartsass.autoPrefixBrowsersList": ["> 1%", "last 10 versions"],
   "terminal.external.linuxExec": "kitty",
   "terminal.integrated.customGlyphs": false,
   "editor.wordWrap": "wordWrapColumn",
-  "languageToolLinter.languageTool.disabledRules": "WHITESPACE_RULE",
   "workbench.enableExperiments": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
   "update.mode": "start",
-  "languageToolLinter.languageTool.ignoredWordsGlobal": []
-  // "[rust]": {
-  //   "editor.defaultFormatter": "rust-lang.rust"
-  // }, // Format used for displaying time inside @done/cancelled
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "C_Cpp.intelliSenseEngine": "Disabled",
+  "pretty-formatter.commentLine": true,
+  "pretty-formatter.disableLanguages": ["css", "sass", "scss"],
+  "pretty-formatter.preserve": 1,
+  "pretty-formatter.styleguide": "google",
+  "scss.lint.compatibleVendorPrefixes": "warning",
+  "scss.lint.duplicateProperties": "warning",
+  "scss.lint.float": "warning",
+  "scss.lint.idSelector": "warning",
+  "scss.lint.ieHack": "warning",
+  "scss.lint.important": "error",
+  "scss.lint.importStatement": "warning",
+  "scss.lint.universalSelector": "warning",
+  "scss.lint.unknownAtRules": "ignore",
+  "scss.lint.boxModel": "warning",
+  "scss.validate": false
 }

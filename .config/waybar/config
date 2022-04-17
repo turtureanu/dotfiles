@@ -14,23 +14,23 @@
 	    }
     },
     "sway/language": {
-	    "format": " | <span text-transform=\"uppercase\">{}</span> | ",
+	    "format": "| <span text-transform=\"uppercase\">{}</span> |",
     },
     "idle_inhibitor": {
-	    "format": " | {icon} ",
+	    "format": " {icon} ",
 	    "format-icons": {
-		    "activated": "  |",
-		    "deactivated": "  |",
+		    "activated": " ",
+		    "deactivated": " ",
 	    },
     },
     "custom/weather": {
         "format": "| {} |",
-	"exec": "curl 'https://wttr.in/?format=1'",
+	"exec": "curl 'https://wttr.in/?format=1' && curl https://wttr.in/?format=2 | sed 's/^.* .//'",
         "interval": 900,
     },
     "custom/cmus": {
 	    "interval": 1,
-	    "exec": "PLAYING=$(cmus-remote -C status | grep file | sed -r 's\/(.*[\\\/])\/\/g' | sed 's\/\\..*\/\/g') && if [ ${#PLAYING} -lt 50 ]; then printf \"$PLAYING\"; else printf \"$PLAYING\" | awk '{ print substr($0, 0, 50) }' | cat | tr '\\n' ' ' | sed 's\/\\s*$\/\/' && printf \"...\" ; fi",
+	    "exec": "PLAYING=$(cmus-remote -C status | grep file | sed -r 's\/(.*[\\\/])\/\/g' | sed 's\/\\..*\/\/g') && if [ ${#PLAYING} -lt 75 ]; then printf \"$PLAYING\"; else printf \"$PLAYING\" | awk '{ print substr($0, 0, 75) }' | cat | tr '\\n' ' ' | sed 's\/\\s*$\/\/' && printf \"...\" ; fi",
 	    "exec-if": "pgrep cmus",
 	    "on-click": "cmus-remote -u",
 	    "escape": true,
@@ -51,11 +51,14 @@
         "max-length": 0,
     },
  
-    "modules-right": ["custom/scratchpad_indicator", "pulseaudio", "cpu", "memory", "temperature"],
+    "modules-right": ["custom/scratchpad_indicator", "pulseaudio", "network", "cpu", "memory", "temperature", "battery", "custom/separator"],
+    "custom/separator": {
+	"format": "| ",
+    },
     "custom/scratchpad_indicator": {
-       "interval": 3,
+       "interval": 1,
        "exec": "swaymsg -t get_tree | jq 'recurse(.nodes[]) | first(select(.name==\"__i3_scratch\")) | .floating_nodes | length | select(. >= 1)'",
-       "format": "{} ",
+       "format": "| {}   ",
        "on-click": "swaymsg 'scratchpad show'",
        "on-click-right": "swaymsg 'move scratchpad'"
     },
@@ -74,6 +77,19 @@
 
 	    "on-click-right": "pavucontrol"
     },
+    "network": {
+    	"interface": "wlan0",
+    	"format": " | {ifname} | ",
+	"interval": "60",
+    	"format-wifi": " | {essid}   | ",    	
+	"format-ethernet": " | {ipaddr}/{cidr}   | ",
+    	"format-disconnected": " | X   | ", //An empty format will hide the module.
+    	"tooltip-format": " | {ifname} via {gwaddr}   | ",
+    	"tooltip-format-wifi": " | {essid}   | ",
+    	"tooltip-format-ethernet": " | {ifname}   | ",
+    	"tooltip-format-disconnected": "Disconnected",
+    	"max-length": 50
+    },
     "cpu": {
 	    "format": " | CPU: {usage}%",
     },
@@ -81,18 +97,30 @@
 	    "format": " | MEM: {}%"
     },
     "temperature": {
-    	    "format": " | TMP: {temperatureC}°C | "
+    	    "format": " | TMP: {temperatureC}°C |"
     },
-},
-{
-    "height": 30,
-    "name": "bottom",
-    "layer": "bottom",
-    "position": "bottom",
-    "modules-center": ["sway/window"],
-    "sway/window": {
-	"tooltip": false,
-        "format": "<span text_transform=\"uppercase\">{}</span>",
+    "battery": {
+	    "bat": "BAT0",
+    	    "interval": 60,
+    	    "states": {
+    	        "warning": 30,
+    	        "critical": 15
+    	    },
+    	    "format": "BAT: {capacity}%",
+    	    "max-length": 25
     },
-}]
+}
+//,
+//{
+//    "height": 30,
+//    "name": "bottom",
+//    "layer": "bottom",
+//    "position": "bottom",
+//    "modules-center": ["sway-window"],
+//    "sway/window": {
+//	"tooltip": false,
+//        "format": "<span text_transform=\"uppercase\">{}</span>",
+//    },
+//}
+]
 

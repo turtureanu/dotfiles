@@ -9,10 +9,17 @@
 ### Mod4: Super
 
 set $mod Mod4
-exec MOZ_ENABLE_WAYLAND 1
 
-# Terminal Emulator
-set $term /usr/local/kitty.app/bin/kitty
+set $config ~/.config/sway
+
+## GTK style
+exec $config/import-gtk-settings.sh
+
+## Dunst
+exec dunst
+
+## Terminal Emulator
+set $term kitty
 
 ## Colors
 set $blue #5fafff
@@ -26,13 +33,16 @@ set $pink #ff6c9b
 set $dark #252525
 set $light #ffffff
 
+## Wayland Variables (used for telling application to run in "wayland" mode)
+set $wayland-vars export \
+	MOZ_ENABLE_WAYLAND=1
+
 # Application launcher | bemenu
-## Firefox-based browser wayland config
 set $font "UbuntuMono Nerd Font Mono 14"
-set $menu bemenu-run \
+set $menu $wayland-vars  && bemenu-run \
 --fn $font \
---prompt "❯" \
---prefix "➜" \
+--prompt "$" \
+--prefix "🞂" \
 --hf "$blue" \
 -n \
 --nb "$dark" \
@@ -65,8 +75,14 @@ font pango: UbuntuMono Nerd Font 0
 
 # Border
 default_border pixel 2
-default_floating_border pixel 2
+default_floating_border pixel 4
 hide_edge_borders smart
+
+# Gaps
+#gaps inner 4
+
+# Cursor theme
+seat seat0 xcursor_theme Vimix-Amethyst 16
 
 # Window Title
 title_align center
@@ -74,7 +90,7 @@ title_align center
 # Execute on startup
 
 ## Bluelight Filter | Gammastep
-exec gammastep -m wayland -l 52:13 -t 4500:4000
+exec gammastep -m wayland -l 52:13 -t 4500:3800
 
 ### -m | Method of setting the temperature
 ### -l | Coordinate
@@ -86,16 +102,15 @@ exec /usr/bin/pipewire & /usr/bin/pipewire-pulse & /usr/bin/pipewire-media-sessi
 # Output
 
 ## Wallpaper
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1366x768.png fill
+output * bg $HOME/wallpaper.png fill
 
 ## Laptop Backlight
 #output eDP-1 disable
 
 ## Idling 
 exec swayidle -w \
-timeout 300 'swaymsg "output eDP-1 dpms off"' \
-resume 'swaymsg "output HDMI-A-1 dpms on"'
+timeout 60 'swaymsg "output * dpms off"' \
+resume 'swaylock -e -i $HOME/work/Wallpapers/Desktop/Kurzgesagt_background.jpg -F -K -r --bs-hl-color "#ff5f87a0" --caps-lock-key-hl-color "#039799a0" --indicator-radius 75 --inside-color "#25252550" --inside-clear-color "#ffff8750" --inside-ver-color "#5fafff50" --inside-wrong-color "#ff5f8750" --key-hl-color "#87d787a0" --layout-bg-color "#252525a0" --layout-border-color "#252525a0" --layout-text-color "#252525" --ring-color "#252525a0" --ring-clear-color "#ffff87a0" --ring-caps-lock-color "#252525a0" --ring-ver-color "#5fafffa0" --ring-wrong-color "#ff5f87a0" --separator-color "#00000000" --text-color "#252525" --text-clear-color "#252525" --text-caps-lock-color "#252525" --text-ver-color "#252525" --font monospace --font-size 24 --indicator-x-position 958 & sleep 1 && swaymsg "output * dpms on"'
 
 # Mouse focusing
 focus_follows_mouse no
@@ -120,8 +135,14 @@ input * {
 
 
 ## Brightness
-bindsym XF86MonBrightnessUp exec brightnessctl s +10%
-bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+
+### Wob setup
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -t 2000 -a center -a bottom -M 10 -H 30 -W 300 -b 2 --background-color "#252525a0" --bar-color "#ffff87ff" --overflow-bar-color "#ff5f87ff" -m 255
+
+### Keybindings
+bindsym XF86MonBrightnessUp exec brightnessctl s +10% && brightnessctl g > $WOBSOCK
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%- && brightnessctl g > $WOBSOCK
 
 ## Audio
 
@@ -160,6 +181,10 @@ bindsym XF86AudioPrev exec cmus-remote -r
 ## Reload the configuration file
 bindsym $mod+Shift+c reload
 
+## Take screenshots
+bindsym Print exec sway-interactive-screenshot
+exec export SWAY_INTERACTIVE_SCREENSHOT_SAVEDIR=/tmp
+
 ## Exit sway
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg exit'
 
@@ -176,6 +201,9 @@ bindsym $mod+Right focus right
 
 bindsym Alt+Right focus next
 bindsym Alt+Left focus prev
+
+bindsym Alt+Tab focus next
+bindsym Alt+Shift+Tab focus prev
 
 ### Move windows
 bindsym $mod+Shift+Left move left
@@ -204,29 +232,26 @@ bindsym $mod+Shift+4 move container to workspace number 4
 ## Layout management
 
 ### Focus split direction
-bindsym $mod+b splith
-bindsym $mod+v splitv
+bindsym $mod+c splitv
+bindsym $mod+v splith
 
 ### Layout styles 
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-## Make the current focus fullscreen
+### Make the current focus fullscreen
 bindsym $mod+f fullscreen
 
-## Toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
+### Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+s floating toggle
 
-# Swap focus between the tiling area and the floating area
-bindsym $mod+space focus mode_toggle
+### Swap focus between the tiling area and the floating area
+bindsym $mod+s focus mode_toggle
 
-# Move focus to the parent container
+### Move focus to the parent container
 bindsym $mod+a focus parent
 
 ## Scratchpad:
-
-### Sway has a "scratchpad", which is a bag of holding for windows.
-### You can send windows there and get them back later.
 
 ### Move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -235,24 +260,18 @@ bindsym $mod+Shift+minus move scratchpad
 ### If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-#
-# Resizing containers:
-#
+## Resize mode
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left  exec $config/resize.sh left 20 px
+    bindsym Down  exec $config/resize.sh down 20 px
+    bindsym Up    exec $config/resize.sh up 20 px
+    bindsym Right exec $config/resize.sh right 20 px
 
-    # Return to default mode
+    ### Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 bindsym $mod+r mode "resize"
 
 # Waybar

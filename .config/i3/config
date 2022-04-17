@@ -11,7 +11,7 @@
 set $mod Mod4
 
 # Terminal Emulator
-set $term /usr/local/kitty.app/bin/kitty
+set $term kitty
 
 ## Colors
 set $blue #5fafff
@@ -26,14 +26,8 @@ set $dark #252525
 set $light #ffffff
 
 # Application launcher | bemenu
-set $menu bemenu-run \
---fn "UbuntuMono Nerd Font Mono 14" \
---prompt "❯" \
---prefix "➜" \
---hf "#5fafff" \
--n \
---tf "#87d787" \
---list 3 | xargs i3-msg exec
+
+set $menu bemenu-run --fn "DejaVu Sans 12" --prompt "\$" --ff "#5fafff" --list 3 --prefix "🞂" --tb "#252525" --hb "#252525" --hf "#5fafff" --fb "#252525" --sb "#252525" --scb "#252525" --tb "#252525" --tf "#ff5f87" --nb "#252525" -i | i3-msg exec
 
 ## --fn     | Specify font: <font> <size>
 ## --prefix | Prefix selected item with <prefix>
@@ -53,14 +47,17 @@ client.background	$dark
 
 # Border
 default_border pixel 2
-default_floating_border pixel 2
+default_floating_border pixel 4
 hide_edge_borders smart
 
 # Window title
-font pando: monospace
+font pango: UbuntuMono Nerd Font 0
 title_align center
 
 # Execute on startup
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 ## Bluelight Filter | Gammastep
 exec gammastep -l 52:13 -t 4500:4000
@@ -72,6 +69,7 @@ exec gammastep -l 52:13 -t 4500:4000
 # Output
 
 ## Wallpaper
+exec feh --bg-fill /home/tux/wallpaper.png
 
 ## Idling 
 #exec swayidle -w \
@@ -82,6 +80,40 @@ exec gammastep -l 52:13 -t 4500:4000
 focus_follows_mouse no
 
 # Key bindings
+## Audio
+
+### Volume
+
+#### Output
+
+##### Increase
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+
+##### Decrease
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+
+##### Toggle Mute
+bindsym XF86AudioMute exec pamixer -t
+
+#### Input
+
+##### Increase
+bindsym Mod1+XF86AudioRaiseVolume exec pamixer --source @DEFAULT_SOURCE@ -i 5 
+
+##### Decrease
+bindsym Mod1+XF86AudioLowerVolume exec pamixer --source @DEFAULT_SOURCE@ -d 5
+
+##### Toggle Mute
+bindsym Mod1+XF86AudioMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+### Media controls
+bindsym XF86AudioPlay exec cmus-remote -u
+bindsym $mod+XF86AudioMute exec cmus-remote -u
+bindsym XF86AudioNext exec cmus-remote -n
+bindsym $mod+XF86AudioRaiseVolume exec cmus-remote -n
+bindsym XF86AudioPrev exec cmus-remote -r
+bindsym $mod+XF86AudioLowerVolume exec cmus-remote -r
+
 
 ## Start a terminal
 bindsym $mod+Return exec $term
@@ -91,6 +123,13 @@ bindsym $mod+q kill
 
 ## Start app launcher
 bindsym $mod+d exec $menu
+
+## Switch keyboard layout
+exec "setxkbmap -layout us,cz && setxkbmap -option 'grp:win_space_toggle' && setxkbmap -variant ,qwerty"
+
+## Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 ## Manage floating windows
 floating_modifier $mod
@@ -111,6 +150,9 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+bindsym Mod1+Right focus next
+bindsym Mod1+Left focus prev
 
 bindsym Mod1+Tab focus next
 bindsym Mod1+Shift+Tab focus prev
@@ -155,7 +197,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+s floating toggle
 
 # Swap focus between the tiling area and the floating area
 bindsym $mod+space focus mode_toggle
@@ -194,7 +236,4 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
-# Polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
