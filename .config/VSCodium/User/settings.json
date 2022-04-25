@@ -21,7 +21,6 @@
   },
   "files.insertFinalNewline": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-
   //  -> HTML
   "html.format.endWithNewline": true,
 
@@ -41,6 +40,10 @@
     "editor.codeActionsOnSave": true
   },
 
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+
   // Extensions
   "code-runner.runInTerminal": true,
 
@@ -54,12 +57,11 @@
   "dartsass.outputFormat": "cssonly",
   "dartsass.sassBinPath": "/usr/bin/sass",
   "dartsass.targetDirectory": "css",
- // SVG Previewer
+  // SVG Previewer
   "svg.preview.mode": "svg",
   // Git
   "git.enableSmartCommit": true,
   "git.autofetch": true,
-  "prettier.htmlWhitespaceSensitivity": "ignore",
   "prettier.trailingComma": "all",
   "sass.format.deleteWhitespace": false,
   "files.trimTrailingWhitespace": true,
@@ -90,5 +92,10 @@
   "scss.lint.universalSelector": "warning",
   "scss.lint.unknownAtRules": "ignore",
   "scss.lint.boxModel": "warning",
-  "scss.validate": false
+  "scss.validate": false,
+  "clangd.path": "/home/tux/.config/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/14.0.0/clangd_14.0.0/bin/clangd",
+  "C_Cpp.autocomplete": "Disabled",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

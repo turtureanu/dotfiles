@@ -90,7 +90,7 @@ title_align center
 # Execute on startup
 
 ## Bluelight Filter | Gammastep
-exec gammastep -m wayland -l 52:13 -t 4500:3800
+exec_always gammastep -m wayland -l 52:13 -t 4500:3800
 
 ### -m | Method of setting the temperature
 ### -l | Coordinate

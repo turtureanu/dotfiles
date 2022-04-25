@@ -25,7 +25,7 @@
     },
     "custom/weather": {
         "format": "| {} |",
-	"exec": "curl 'https://wttr.in/?format=1' && curl https://wttr.in/?format=2 | sed 's/^.* .//'",
+	"exec": "curl https://wttr.in/?format=1 && curl https://wttr.in/?format=2 | sed 's/^.* .//'",
         "interval": 900,
     },
     "custom/cmus": {
