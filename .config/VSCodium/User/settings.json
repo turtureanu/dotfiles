@@ -97,5 +97,6 @@
   "C_Cpp.autocomplete": "Disabled",
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "kite.showWelcomeNotificationOnStartup": false
 }

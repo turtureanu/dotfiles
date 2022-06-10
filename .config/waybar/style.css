@@ -1,7 +1,7 @@
 /* Color variables... the GTK way */
 @define-color blue #5fafff;
 @define-color green #87d787;
-@define-color salmon #ffaf87;
+@define-color orange #ffaf87;
 @define-color yellow #ffff87;
 @define-color turquoise #039799;
 @define-color red #ff5f87 ;
@@ -94,9 +94,23 @@ tooltip label {
   font-size: 1.25rem;
 }
 
+@keyframes battery-warning {
+	0% {
+		color: @red;
+	}
+	100% {
+		color: @orange;
+	}
+}
+
 #battery.warning:not(.charging) {
-  color: @salmon;
+  animation: battery-warning infinite 2s;
   background-color: @dark;
+}
+
+#battery.warning.charging {
+	color: @green;
+	background-color: @dark;
 }
 
 #mode {
@@ -110,5 +124,5 @@ tooltip label {
 }
 
 #custom-weather {
-  font-weight: 900;
+	font-family: "Twitter Emoji";
 }

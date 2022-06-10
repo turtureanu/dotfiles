@@ -39,8 +39,7 @@ set $wayland-vars export \
 
 # Application launcher | bemenu
 set $font "UbuntuMono Nerd Font Mono 14"
-set $menu $wayland-vars  && bemenu-run \
---fn $font \
+set $menu $wayland-vars && bemenu-run --fn $font \
 --prompt "$" \
 --prefix "🞂" \
 --hf "$blue" \
@@ -52,7 +51,8 @@ set $menu $wayland-vars  && bemenu-run \
 --scb "$dark" \
 --tb "$dark" \
 --tf "$green" \
---list 3 | xargs swaymsg exec
+--list 3
+
 
 ## --fn     | Specify font: <font> <size>
 ## --prefix | Prefix selected item with <prefix>
@@ -102,15 +102,15 @@ exec /usr/bin/pipewire & /usr/bin/pipewire-pulse & /usr/bin/pipewire-media-sessi
 # Output
 
 ## Wallpaper
-output * bg $HOME/wallpaper.png fill
+output * bg $HOME/work/Wallpapers/Desktop/Artix/microsoft.svg fill
 
 ## Laptop Backlight
 #output eDP-1 disable
 
 ## Idling 
 exec swayidle -w \
-timeout 60 'swaymsg "output * dpms off"' \
-resume 'swaylock -e -i $HOME/work/Wallpapers/Desktop/Kurzgesagt_background.jpg -F -K -r --bs-hl-color "#ff5f87a0" --caps-lock-key-hl-color "#039799a0" --indicator-radius 75 --inside-color "#25252550" --inside-clear-color "#ffff8750" --inside-ver-color "#5fafff50" --inside-wrong-color "#ff5f8750" --key-hl-color "#87d787a0" --layout-bg-color "#252525a0" --layout-border-color "#252525a0" --layout-text-color "#252525" --ring-color "#252525a0" --ring-clear-color "#ffff87a0" --ring-caps-lock-color "#252525a0" --ring-ver-color "#5fafffa0" --ring-wrong-color "#ff5f87a0" --separator-color "#00000000" --text-color "#252525" --text-clear-color "#252525" --text-caps-lock-color "#252525" --text-ver-color "#252525" --font monospace --font-size 24 --indicator-x-position 958 & sleep 1 && swaymsg "output * dpms on"'
+timeout 90 'swaymsg "output * dpms off"' \
+resume 'swaylock -e -i $HOME/work/Wallpapers/Desktop/Kurzgesagt_background.jpg -F -k -r --bs-hl-color "#ff5f87a0" --caps-lock-key-hl-color "#039799a0" --indicator-radius 75 --inside-color "#25252550" --inside-clear-color "#ffff8750" --inside-ver-color "#5fafff50" --inside-wrong-color "#ff5f8750" --key-hl-color "#87d787a0" --layout-bg-color "#252525a0" --layout-border-color "#252525a0" --layout-text-color "#ffffff" --ring-color "#252525a0" --ring-clear-color "#ffff87a0" --ring-caps-lock-color "#252525a0" --ring-ver-color "#5fafffa0" --ring-wrong-color "#ff5f87a0" --separator-color "#00000000" --text-color "#252525" --text-clear-color "#252525" --text-caps-lock-color "#252525" --text-ver-color "#252525" --font monospace --font-size 22 --indicator-x-position 958 & sleep 0.3 && swaymsg "output * dpms on"'
 
 # Mouse focusing
 focus_follows_mouse no
@@ -141,6 +141,8 @@ set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -t 2000 -a center -a bottom -M 10 -H 30 -W 300 -b 2 --background-color "#252525a0" --bar-color "#ffff87ff" --overflow-bar-color "#ff5f87ff" -m 255
 
 ### Keybindings
+
+#### Brightness
 bindsym XF86MonBrightnessUp exec brightnessctl s +10% && brightnessctl g > $WOBSOCK
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%- && brightnessctl g > $WOBSOCK
 
@@ -250,6 +252,12 @@ bindsym $mod+s focus mode_toggle
 
 ### Move focus to the parent container
 bindsym $mod+a focus parent
+
+
+bindsym $mod+Ctrl+Up	exec $config/snap.sh up 0 40
+bindsym $mod+Ctrl+Right	exec $config/snap.sh right
+bindsym $mod+Ctrl+Down	exec $config/snap.sh down
+bindsym $mod+Ctrl+Left	exec $config/snap.sh left
 
 ## Scratchpad:
 

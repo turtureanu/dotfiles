@@ -27,4 +27,12 @@ return require('packer').startup(function()
 
     -- Rainbow | Bracket pair colorizer
     use 'luochen1990/rainbow'
+    
+    -- Git plugin
+    use {
+      'tanvirtin/vgit.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim'
+      }
+    }
 end)
