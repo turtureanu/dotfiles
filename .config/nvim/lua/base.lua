@@ -13,4 +13,4 @@ vim.o.number = true
 -- Leader key
 vim.g.mapleader = ';'
 
-
+vim.o.shiftwidth = 2

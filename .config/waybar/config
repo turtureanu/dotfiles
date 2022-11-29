@@ -3,101 +3,80 @@
     "layer": "top",
     "position": "top",
     "spacing": 4,
-    "modules-left": ["sway/workspaces", "sway/language", "idle_inhibitor", "custom/weather" , "custom/cmus"],
-    "sway/workspaces": {
-	    "disable-scroll": true,
-	    "persistent_workspaces": {
-		    "1": [],
-		    "2": [],
-		    "3": [],
-		    "4": [],
-	    }
-    },
-    "sway/language": {
-	    "format": "| <span text-transform=\"uppercase\">{}</span> |",
-    },
+    "modules-left": [ "wlr/workspaces"],
     "idle_inhibitor": {
 	    "format": " {icon} ",
 	    "format-icons": {
 		    "activated": " ",
 		    "deactivated": " ",
 	    },
-    },
-    "custom/weather": {
-        "format": "| {} |",
-	"exec": "curl https://wttr.in/?format=1 && curl https://wttr.in/?format=2 | sed 's/^.* .//'",
-        "interval": 900,
-    },
-    "custom/cmus": {
-	    "interval": 1,
-	    "exec": "PLAYING=$(cmus-remote -C status | grep file | sed -r 's\/(.*[\\\/])\/\/g' | sed 's\/\\..*\/\/g') && if [ ${#PLAYING} -lt 75 ]; then printf \"$PLAYING\"; else printf \"$PLAYING\" | awk '{ print substr($0, 0, 75) }' | cat | tr '\\n' ' ' | sed 's\/\\s*$\/\/' && printf \"...\" ; fi",
-	    "exec-if": "pgrep cmus",
-	    "on-click": "cmus-remote -u",
-	    "escape": true,
-	    "format": "♫ {}",
+			"tooltip": false,
     },
 
-    "modules-center": ["sway/mode", "clock", "sway/mode"],
+		"wlr/workspaces": {
+			"persistent_workspaces": {
+				"1": [],
+				"2": [],
+				"3": [],
+				"4": [],
+				"5": [],
+				"6": [],
+			},
+			"disable-scroll": true,
+			"on-click": "activate",
+			"format": "{icon}",
+			"format-icons": {
+				"1": " ",
+				"2": " ",
+				"3": " ",
+				"4": " ",
+				"5": " ",
+				"6": " ",
+				"default": " ",
+				"urgent": " "
+			}
+		},
+
+    "modules-center": ["clock"],
     "clock": {
-    	    "timezone": "Europe/Berlin",
+    	"timezone": "Europe/Berlin",
 	    "locale": "en_US.UTF-8",
 	    "interval": 1,
 	    "format": "{:|%m|%d|0%u| |<span color=\"#5fafff\">%I</span>|<span color=\"#87d787\">%M</span>|<span color=\"#ff5f87\">%S</span>|}",
-	    "tooltip-format": "<span size=\"12.5pt\">{:<span underline=\"double\" color=\"#5fafff\">%Y</span> <span underline=\"double\" color=\"#87d787\">%b.</span> <span underline=\"double\" color=\"#ff5f87\">%A</span>}\n<span underline_color=\"#ff5f87\">{calendar}</span></span>",
+	    "tooltip-format": "<span size=\"16pt\">{:<span underline=\"double\" color=\"#5fafff\">%Y</span> <span underline=\"double\" color=\"#87d787\">%b.</span> <span underline=\"double\" color=\"#ff5f87\">%A</span>}\n<span underline_color=\"#ff5f87\">{calendar}</span></span>",
     },
 
-    "sway/mode": {
-        "format": "",
-        "max-length": 0,
-    },
- 
-    "modules-right": ["custom/scratchpad_indicator", "pulseaudio", "network", "cpu", "memory", "temperature", "battery", "custom/separator"],
-    "custom/separator": {
-	"format": "| ",
-    },
-    "custom/scratchpad_indicator": {
-       "interval": 1,
-       "exec": "swaymsg -t get_tree | jq 'recurse(.nodes[]) | first(select(.name==\"__i3_scratch\")) | .floating_nodes | length | select(. >= 1)'",
-       "format": "| {}   ",
-       "on-click": "swaymsg 'scratchpad show'",
-       "on-click-right": "swaymsg 'move scratchpad'"
-    },
+    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "memory", "battery"],
     "pulseaudio": {
-	    "format": "| {volume}% {icon} | {format_source}",
-	    "format-bluetooth": "| {volume}% {icon} | {format_source}",
-	    "format-muted": "| 0% ‭ﱝ | {format_source}",
+	    "format": " {icon} {volume}% | {format_source}",
+	    "format-bluetooth": "{icon} {volume}% | {format_source}",
+	    "format-muted": " ‭ﱝ  {volume}% | {format_source}",
 
 	    "format-icons": {
 		    "headset": "",
 		    "default": [" ", " "],
 	    },
 
-	    "format-source": "{volume}%  | ",
-	    "format-source-muted": "0%  | ",
+	    "format-source": "{volume}%  ",
+	    "format-source-muted": "{volume}%  ",
 
 	    "on-click-right": "pavucontrol"
     },
     "network": {
     	"interface": "wlan0",
-    	"format": " | {ifname} | ",
+    	"format": "{ifname}",
 	"interval": "60",
-    	"format-wifi": " | {essid}   | ",    	
-	"format-ethernet": " | {ipaddr}/{cidr}   | ",
-    	"format-disconnected": " | X   | ", //An empty format will hide the module.
-    	"tooltip-format": " | {ifname} via {gwaddr}   | ",
-    	"tooltip-format-wifi": " | {essid}   | ",
-    	"tooltip-format-ethernet": " | {ifname}   | ",
-    	"tooltip-format-disconnected": "Disconnected",
-    	"max-length": 50
+    	"format-wifi": " {essid}   ",
+	"format-ethernet": " {ipaddr}/{cidr}  ",
+    	"format-disconnected": "睊 ",
+    	"max-length": 50,
+			"tooltip": false
     },
     "cpu": {
-	    "format": " | CPU: {usage}%",
+	    "format": "{usage}%  "
     },
     "memory": {
-	    "format": " | MEM: {}%"
-    },
-    "temperature": {
-    	    "format": " | TMP: {temperatureC}°C |"
+	    "format": "{}%  "
     },
     "battery": {
 	    "bat": "BAT0",
@@ -106,21 +85,8 @@
     	        "warning": 30,
     	        "critical": 15
     	    },
-    	    "format": "BAT: {capacity}%",
+    	    "format": "{capacity}%  ",
     	    "max-length": 25
-    },
+    }
 }
-//,
-//{
-//    "height": 30,
-//    "name": "bottom",
-//    "layer": "bottom",
-//    "position": "bottom",
-//    "modules-center": ["sway-window"],
-//    "sway/window": {
-//	"tooltip": false,
-//        "format": "<span text_transform=\"uppercase\">{}</span>",
-//    },
-//}
 ]
-

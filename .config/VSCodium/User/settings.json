@@ -1,7 +1,7 @@
 {
   // Editor
   "editor.fontFamily": "'UbuntuMono Nerd Font', 'Verdana', monospace, 'Droid Sans Fallback'",
-  "editor.fontSize": 16,
+  "editor.fontSize": 15,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "explorer.confirmDelete": false,
@@ -13,19 +13,13 @@
 
   //  -> Icon Theme
   "workbench.iconTheme": "material-icon-theme",
-
-  //  -> Formatting
-  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": true
   },
   "files.insertFinalNewline": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   //  -> HTML
   "html.format.endWithNewline": true,
-
-  //  -> Files
-  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 10000,
   "files.maxMemoryForLargeFilesMB": 1664,
   "files.trimFinalNewlines": true,
 
@@ -53,7 +47,6 @@
   "liveServer.settings.donotVerifyTags": true,
   //  -> DARTJS Sass Compiler
   "dartsass.disableSourceMap": true,
-  "dartsass.disableCompileOnSave": true,
   "dartsass.outputFormat": "cssonly",
   "dartsass.sassBinPath": "/usr/bin/sass",
   "dartsass.targetDirectory": "css",
@@ -66,12 +59,10 @@
   "sass.format.deleteWhitespace": false,
   "files.trimTrailingWhitespace": true,
   "livePugCompiler.savePath": "/",
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "Edge Dark",
   "window.menuBarVisibility": "toggle",
-  "terminal.integrated.fontSize": 16,
   "dartsass.autoPrefixBrowsersList": ["> 1%", "last 10 versions"],
   "terminal.external.linuxExec": "kitty",
-  "terminal.integrated.customGlyphs": false,
   "editor.wordWrap": "wordWrapColumn",
   "workbench.enableExperiments": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
@@ -98,5 +89,55 @@
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "kite.showWelcomeNotificationOnStartup": false
+  "go.gopath": "/home/tux/work/Learn/Go",
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "ltex.additionalRules.enablePickyRules": true,
+  "ltex.completionEnabled": true,
+  "ltex.additionalRules.motherTongue": "en-US",
+  "terminal.integrated.fontFamily": "UbuntuMono Nerd Font",
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontWeight": "600",
+  "terminal.integrated.lineHeight": 1.125,
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.go$",
+        "cmd": "golines ${file} -w"
+      }
+    ]
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "dartsass.disableCompileOnSave": true,
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": 1,
+  "files.autoSave": "afterDelay",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "stylelint.snippet": [
+    "css",
+    "less",
+    "postcss",
+    "scss"
+  ],
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "scss"
+  ],
+  "cmake.configureOnOpen": false,
+  "editor.formatOnSave": true
 }

@@ -35,4 +35,24 @@ return require('packer').startup(function()
         'nvim-lua/plenary.nvim'
       }
     }
+
+    -- Conquerer of Completion
+    use {
+      'neoclide/coc.nvim',
+      branch = 'release'
+    }
+    -- Nvim Autopairs
+    use {
+	"windwp/nvim-autopairs",
+    	config = function() require("nvim-autopairs").setup {} end
+    }
+
+    -- Terminal extension
+    use {
+      "akinsho/toggleterm.nvim",
+      tag = 'v1.*',
+      config = function()
+	require("toggleterm").setup()
+      end
+    }
 end)

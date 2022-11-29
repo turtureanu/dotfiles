@@ -1,16 +1,126 @@
 /* Color variables... the GTK way */
-@define-color blue #5fafff;
-@define-color green #87d787;
-@define-color orange #ffaf87;
-@define-color yellow #ffff87;
-@define-color turquoise #039799;
-@define-color red #ff5f87 ;
-@define-color pink #ff6c9b;
+@define-color blue #4c99e6;
+@define-color green #4ce6b3;
+@define-color yellow #e6cc4c;
+@define-color red #e64c4c;
+@define-color orange #ff8847;
+@define-color purple #9ba0ff;
+@define-color pink #ff8080;
 
-@define-color dark #252525;
-@define-color gray #bcbcbc;
+@define-color dark #253035;
+@define-color gray #bababa;
 @define-color white #ffffff;
 
+* {
+  all: unset;
+}
+
+window {
+  font-family: "UbuntuMono Nerd Font";
+  background-color: RGBA(37, 48, 53, 0.75);
+}
+
+tooltip {
+  background-color: @dark;
+  border-radius: 0.25rem;
+  padding: 2rem;
+}
+
+.modules-right > * > * {
+  padding: 0 0.75rem;
+  /* border-bottom: solid 2px transparent; */
+  border-top: solid 2px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#pulseaudio {
+  border-color: @green;
+}
+
+#network {
+  border-color: @blue;
+}
+
+#cpu {
+  border-color: @red;
+}
+
+#memory {
+  border-color: @orange;
+}
+
+#battery {
+  border-color: @yellow;
+}
+
+#workspaces {
+  font-size: 1.4rem;
+}
+
+#workspaces button {
+  padding: 0 0.5rem 0 0.75rem;
+  border-top: white solid 2px;
+  border-bottom: transparent solid 2px;
+  margin: 0 2px;
+}
+
+#workspaces button:first-child {
+  padding-left: 1.125rem;
+  margin-left: 0;
+}
+
+#workspaces button.active {
+  border-top-color: @purple;
+}
+
+#workspaces button:hover {
+  border-top-color: @purple;
+}
+
+@keyframes urgent {
+  0% {
+    color: @red;
+  }
+
+  50% {
+    color: @white;
+  }
+
+  100% {
+    color: @red;
+  }
+}
+
+#workspaces button.urgent {
+  animation: urgent 100ms ease-in-out infinite;
+}
+
+#clock {
+  font-family: "Roboto Mono";
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+@keyframes battery-warning {
+  0% {
+    color: @red;
+  }
+  100% {
+    color: @white;
+  }
+}
+
+#battery.warning:not(.charging) {
+  animation: battery-warning infinite 2s;
+  background-color: @dark;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+/*
 * {
   border: none;
   border-radius: 0;
@@ -21,14 +131,13 @@
 }
 
 window#waybar {
-  color: @white;
-  background: @dark;
+  background-color: @dark;
 }
 
 tooltip {
   border: 0.125rem dashed @white;
   border-radius: 0.5em;
-  background-color: RGBA(45, 45, 45, 0.875);
+  background-color: RGBA(37, 48, 53, 0.125);
   text-decoration-color: @red;
   text-decoration: underline;
 }
@@ -41,34 +150,40 @@ tooltip label {
 
 #workspaces button {
   color: @white;
-  padding: 0 0.125em;
-  border-top: transparent solid 0.2rem;
+  padding: 0 0.5em;
   box-shadow: none;
 }
 
+#workspaces button * {
+  font-size: 1.25rem;
+}
+
 #workspaces button:hover {
-  background: initial;
-  transition-duration: 250ms;
-  border-top-color: @white;
   text-shadow: unset;
+  color: @red;
 }
 
 #workspaces button.persistent {
   color: @gray;
-  border-top: transparent solid 0.2rem;
+  border: solid red 10px;
 }
 
 #workspaces button.focused {
-  color: @blue;
-  border-top-color: @blue;
-  box-shadow: none;
+  background-color: #64727D;
+}
 
+#workspaces button.active {
+  color: @pink;
+  box-shadow: none;
+}
+
+#workspaces button:first-child {
+  padding-left: 1em;
 }
 
 @keyframes urgent {
   0% {
     color: @red;
-    border-color: @pink;
   }
 
   50% {
@@ -83,7 +198,7 @@ tooltip label {
 }
 
 #workspaces button.urgent {
-  animation: urgent 750ms ease-in-out infinite;
+  animation: urgent 500ms ease-in-out infinite;
 }
 
 #clock {  font-weight: 700;
@@ -91,26 +206,8 @@ tooltip label {
 }
 
 #clock {
-  font-size: 1.25rem;
-}
-
-@keyframes battery-warning {
-	0% {
-		color: @red;
-	}
-	100% {
-		color: @orange;
-	}
-}
-
-#battery.warning:not(.charging) {
-  animation: battery-warning infinite 2s;
-  background-color: @dark;
-}
-
-#battery.warning.charging {
-	color: @green;
-	background-color: @dark;
+  font-size: 1.125rem;
+  font-family: "Roboto Mono";
 }
 
 #mode {
@@ -126,3 +223,8 @@ tooltip label {
 #custom-weather {
 	font-family: "Twitter Emoji";
 }
+
+#workspaces:focus {
+  background-color: red;
+}
+*/
