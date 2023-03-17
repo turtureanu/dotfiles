@@ -5,7 +5,7 @@ vim.o.mouse = 'a'
 vim.opt.termguicolors = true
 
 -- Colorscheme
-vim.cmd('colorscheme onehalfdark')
+vim.cmd('colorscheme nord')
 
 -- Enable number lines
 vim.o.number = true

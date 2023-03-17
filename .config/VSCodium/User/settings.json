@@ -10,7 +10,6 @@
   "workbench.editor.titleScrollbarSizing": "large",
   "workbench.activityBar.visible": true,
   "workbench.editor.wrapTabs": true,
-
   //  -> Icon Theme
   "workbench.iconTheme": "material-icon-theme",
   "editor.codeActionsOnSave": {
@@ -22,25 +21,20 @@
   "files.autoSaveDelay": 10000,
   "files.maxMemoryForLargeFilesMB": 1664,
   "files.trimFinalNewlines": true,
-
   //  -> Terminal
   "terminal.integrated.cursorStyle": "underline",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.rightClickBehavior": "default",
-
   //  -> Language Specific Configurations
   "[v]": {
     "editor.defaultFormatter": "0x9ef.vscode-vlang",
     "editor.codeActionsOnSave": true
   },
-
   "[cpp]": {
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
   },
-
   // Extensions
   "code-runner.runInTerminal": true,
-
   // Web Extensions
   //  -> Live Server
   "liveServer.settings.donotShowInfoMsg": true,
@@ -59,7 +53,7 @@
   "sass.format.deleteWhitespace": false,
   "files.trimTrailingWhitespace": true,
   "livePugCompiler.savePath": "/",
-  "workbench.colorTheme": "Edge Dark",
+  "workbench.colorTheme": "Edge Dark (Aura)",
   "window.menuBarVisibility": "toggle",
   "dartsass.autoPrefixBrowsersList": ["> 1%", "last 10 versions"],
   "terminal.external.linuxExec": "kitty",
@@ -118,26 +112,39 @@
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": 1,
-  "files.autoSave": "afterDelay",
+  "files.autoSave": "onWindowChange",
   "[typescriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
-  "stylelint.snippet": [
-    "css",
-    "less",
-    "postcss",
-    "scss"
-  ],
-  "stylelint.validate": [
-    "css",
-    "less",
-    "postcss",
-    "scss"
-  ],
+  "stylelint.snippet": ["css", "less", "postcss", "scss"],
+  "stylelint.validate": ["css", "less", "postcss", "scss"],
   "cmake.configureOnOpen": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "markdown.extension.theming.decoration.renderTrailingSpace": true,
+  "ltex.enabled": [
+    "mdx",
+    "bibtex",
+    "context",
+    "context.tex",
+    "html",
+    "latex",
+    "markdown",
+    "org",
+    "restructuredtext",
+    "rsweave"
+  ],
+  "workbench.editorAssociations": {
+    "*.pdf": "default"
+  },
+  "editor.renderWhitespace": "none",
+  "window.zoomLevel": 1
 }

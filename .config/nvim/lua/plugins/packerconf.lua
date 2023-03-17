@@ -15,6 +15,9 @@ return require('packer').startup(function()
     -- Nvim colorizer | Colorize color values
     use 'norcalli/nvim-colorizer.lua'
 
+    -- Nord theme
+    use 'shaunsingh/nord.nvim'
+
     -- Indent Blankline | Indent guides
     use {
 	'lukas-reineke/indent-blankline.nvim',

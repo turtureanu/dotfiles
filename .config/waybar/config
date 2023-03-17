@@ -1,52 +1,49 @@
 [{
-    "height": 40,
-    "layer": "top",
-    "position": "top",
-    "spacing": 4,
-    "modules-left": [ "wlr/workspaces"],
-    "idle_inhibitor": {
-	    "format": " {icon} ",
-	    "format-icons": {
-		    "activated": " ",
-		    "deactivated": " ",
-	    },
-			"tooltip": false,
-    },
+  "height": 40,
+  "layer": "top",
+  "position": "top",
+  "spacing": 4,
 
-		"wlr/workspaces": {
-			"persistent_workspaces": {
-				"1": [],
-				"2": [],
-				"3": [],
-				"4": [],
-				"5": [],
-				"6": [],
-			},
-			"disable-scroll": true,
-			"on-click": "activate",
-			"format": "{icon}",
-			"format-icons": {
-				"1": " ",
-				"2": " ",
-				"3": " ",
-				"4": " ",
-				"5": " ",
-				"6": " ",
-				"default": " ",
-				"urgent": " "
-			}
-		},
+  "modules-left": [ "wlr/workspaces"],
 
-    "modules-center": ["clock"],
-    "clock": {
-    	"timezone": "Europe/Berlin",
+  "idle_inhibitor": {
+	  "format": " {icon} ",
+		"tooltip": false,
+	  "format-icons": {
+	    "activated": " ",
+	    "deactivated": " ",
+	  },
+  },
+
+  "wlr/workspaces": {
+   	"disable-scroll": true,
+		"all-outputs": true,
+		"on-click": "activate",
+		"format": "{icon}",
+		"format-icons": {
+			"1": " ",
+			"2": " ",
+			"3": " ",
+			"4": " ",
+			"5": " ",
+			"6": " ",
+			"default": " ",
+			"urgent": " "
+		}
+	},
+
+  "modules-center": ["clock"],
+
+  "clock": {
+   "timezone": "Europe/Berlin",
 	    "locale": "en_US.UTF-8",
 	    "interval": 1,
-	    "format": "{:|%m|%d|0%u| |<span color=\"#5fafff\">%I</span>|<span color=\"#87d787\">%M</span>|<span color=\"#ff5f87\">%S</span>|}",
-	    "tooltip-format": "<span size=\"16pt\">{:<span underline=\"double\" color=\"#5fafff\">%Y</span> <span underline=\"double\" color=\"#87d787\">%b.</span> <span underline=\"double\" color=\"#ff5f87\">%A</span>}\n<span underline_color=\"#ff5f87\">{calendar}</span></span>",
+	    "format": "{:|%m|%d|0%u| |<span color=\"#81a1c1\">%I</span>|<span color=\"#a3be8c\">%M</span>|<span color=\"#bf616a\">%S</span>|}",
+	    //"tooltip-format": "<span size=\"16pt\">{:<span underline=\"double\" color=\"#81a1c1\">%Y</span> <span underline=\"double\" color=\"#a3be8c\">%b.</span> <span underline=\"double\" color=\"#bf616a\">%A</span>}\n<span underline_color=\"#bf616a\">{calendar}</span></span>",
     },
 
     "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "memory", "battery"],
+
     "pulseaudio": {
 	    "format": " {icon} {volume}% | {format_source}",
 	    "format-bluetooth": "{icon} {volume}% | {format_source}",
@@ -62,31 +59,35 @@
 
 	    "on-click-right": "pavucontrol"
     },
+
     "network": {
     	"interface": "wlan0",
     	"format": "{ifname}",
-	"interval": "60",
+			"interval": "60",
     	"format-wifi": " {essid}   ",
-	"format-ethernet": " {ipaddr}/{cidr}  ",
+			"format-ethernet": " {ipaddr}/{cidr}  ",
     	"format-disconnected": "睊 ",
     	"max-length": 50,
 			"tooltip": false
     },
+
     "cpu": {
 	    "format": "{usage}%  "
     },
+
     "memory": {
 	    "format": "{}%  "
     },
+
     "battery": {
 	    "bat": "BAT0",
-    	    "interval": 60,
-    	    "states": {
-    	        "warning": 30,
-    	        "critical": 15
-    	    },
-    	    "format": "{capacity}%  ",
-    	    "max-length": 25
+    	"interval": 60,
+			"format": "{capacity}%  ",
+			"max-length": 25,
+
+    	"states": {
+    	  "warning": 30,
+    		"critical": 15
+    	},
     }
-}
-]
+}]

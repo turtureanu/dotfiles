@@ -1,13 +1,12 @@
 /* Color variables... the GTK way */
-@define-color blue #4c99e6;
-@define-color green #4ce6b3;
-@define-color yellow #e6cc4c;
-@define-color red #e64c4c;
-@define-color orange #ff8847;
-@define-color purple #9ba0ff;
-@define-color pink #ff8080;
+@define-color blue #81A1C1;
+@define-color green #A3BE8C;
+@define-color yellow #EBCB8B;
+@define-color red #BF616A;
+@define-color orange #d08770;
+@define-color purple #b48ead;
 
-@define-color dark #253035;
+@define-color dark #2E3440;
 @define-color gray #bababa;
 @define-color white #ffffff;
 
@@ -17,7 +16,7 @@
 
 window {
   font-family: "UbuntuMono Nerd Font";
-  background-color: RGBA(37, 48, 53, 0.75);
+  background-color: @dark;
 }
 
 tooltip {
@@ -71,11 +70,11 @@ tooltip {
 }
 
 #workspaces button.active {
-  border-top-color: @purple;
+  border-top-color: @blue;
 }
 
 #workspaces button:hover {
-  border-top-color: @purple;
+  border-top-color: @red;
 }
 
 @keyframes urgent {
@@ -170,11 +169,6 @@ tooltip label {
 
 #workspaces button.focused {
   background-color: #64727D;
-}
-
-#workspaces button.active {
-  color: @pink;
-  box-shadow: none;
 }
 
 #workspaces button:first-child {
